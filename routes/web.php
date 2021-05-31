@@ -1,5 +1,7 @@
 <?php
 
+/** @var \Laravel\Lumen\Routing\Router $router */
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -15,18 +17,18 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-
+// unsecure routes
 $router->group(['prefix' => 'api'], function () use ($router) {
     $router->get('/users',['uses' => 'UserController@getUsers']);
-
 });
-
-
-
+   
 $router->get('/users', 'UserController@index');
-$router->post('/users', 'UserController@add');
+$router->post('/users', 'UserController@addUser');
 $router->get('/users/{id}', 'UserController@show');
 $router->put('/users/{id}', 'UserController@update');
 $router->patch('/users/{id}', 'UserController@update');
 $router->delete('/users/{id}', 'UserController@delete');
 
+// userjob routes
+$router->get('/usersjob','UserJobController@index');
+$router->get('/userjob/{id}','UserJobController@show'); // get user by id
